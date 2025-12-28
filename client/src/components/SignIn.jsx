@@ -1,0 +1,97 @@
+import React, { useState } from 'react'
+import styled from 'styled-components';
+import TextInput from './Textinput';
+import Button from './Button';
+import { UserSignIn } from '../api';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../redux/reducers/userSlice';
+
+const Container = styled.div`
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+`;
+const Title = styled.div`
+    font-size: 30px;
+    font-weight: 800;
+    color: ${({ theme }) => theme.text_primary};
+`;
+const Span = styled.div`
+    font-size: 16px;
+    font-weight: 400;
+    color: ${({ theme }) => theme.text_secondary + 90};
+`;
+const ErrorText = styled.div`
+    font-size: 14px;
+    color: ${({ theme }) => theme.red};
+    text-align: center;
+`;
+
+const SignIn = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
+  };
+
+  const handleSignIn = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await UserSignIn(formData);
+      dispatch(loginSuccess(res.data));
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Container>
+        <div>
+            <Title>Welcome to Fitness Tracker👋</Title>
+            <Span>Please fill in the details here.</Span>
+        </div>
+        <div style={{
+            display: 'flex',
+            gap: '20px',
+            flexDirection: 'column'
+        }}>
+            <TextInput 
+              label="Email" 
+              name="email"
+              placeholder="Enter your Email Address" 
+              value={formData.email}
+              handelChange={handleChange}
+            />
+            <TextInput 
+              label="Password" 
+              name="password"
+              password
+              placeholder="Enter your Password" 
+              value={formData.password}
+              handelChange={handleChange}
+            />
+            {error && <ErrorText>{error}</ErrorText>}
+            <Button 
+              text="Sign In" 
+              onClick={handleSignIn}
+              isLoading={loading}
+              isDisabled={loading}
+            />
+        </div>
+    </Container>
+  )
+}
+
+export default SignIn;

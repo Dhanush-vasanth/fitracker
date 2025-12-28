@@ -1,0 +1,38 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "dhanush",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@google/generative-ai": "^0.24.1",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/lab": "^7.0.0-beta.17",
+    "@mui/material": "^7.3.2",
+    "@mui/x-charts": "^8.12.0",
+    "@mui/x-date-pickers": "^8.12.0",
+    "@reduxjs/toolkit": "^2.9.0",
+    "axios": "^1.12.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.18",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.2",
+    "nodeman": "^1.1.2",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.3",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.19"
+  }
+}

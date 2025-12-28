@@ -1,0 +1,1 @@
+server :npm install bcrypt cors dotenv express jsonwebtoken mongoose nodeman
