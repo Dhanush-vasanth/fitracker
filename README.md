@@ -1,6 +1,11 @@
-# Fitness Tracker Application
+# FitTracker 💪
 
 A full-stack MERN application for tracking workouts and fitness progress.
+
+## 🌐 Live Demo
+
+- **Frontend**: [https://fitracker-frontend.onrender.com](https://fitracker-frontend.onrender.com)
+- **Backend API**: [https://fitracker-4.onrender.com](https://fitracker-4.onrender.com)
 
 ## Features
 
