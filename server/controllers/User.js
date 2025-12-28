@@ -222,11 +222,28 @@ export const getWorkoutsByDate = async ( req, res, next) => {
 export const addWorkout = async (req, res , next) => {
   try {
     const userId = req.user?.id;
-    const { workoutString } = req.body;
+    const { workoutString, date } = req.body;
 
     if (!workoutString){
       return next(createError(400, "workoutString is required"));
     }
+
+    // Parse the date or use today
+    let workoutDate;
+    if (date) {
+      // Support multiple date formats: DD-MM-YYYY, YYYY-MM-DD
+      const parts = date.split('-');
+      if (parts[0].length === 4) {
+        // YYYY-MM-DD format
+        workoutDate = new Date(date);
+      } else {
+        // DD-MM-YYYY format
+        workoutDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+      }
+    } else {
+      workoutDate = new Date();
+    }
+
     // split workoutString into Lines
     const eachworkout = workoutString.split("\n").map((line) => line.trim()).filter(line => line.length > 0);
 
@@ -273,7 +290,7 @@ export const addWorkout = async (req, res , next) => {
     // Calculate calories burnt for each workout
     for (const workout of parsedWorkouts) {
       workout.caloriesBurned = parseFloat(calculateCaloriesBurnt(workout));
-      await Workout.create({ ...workout, user: userId });
+      await Workout.create({ ...workout, user: userId, date: workoutDate });
     }
 
     return res.status(201).json({

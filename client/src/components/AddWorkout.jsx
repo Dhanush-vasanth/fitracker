@@ -482,7 +482,9 @@ const AddWorkout = ({ isOpen, onClose, onWorkoutAdded, selectedDate }) => {
 
     try {
       const workoutString = buildWorkoutString();
-      await addWorkout({ workoutString });
+      // Send the selected date along with the workout
+      const workoutDate = selectedDate ? selectedDate.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD');
+      await addWorkout({ workoutString, date: workoutDate });
       
       // Reset form
       setWorkoutTitle('');
@@ -503,11 +505,14 @@ const AddWorkout = ({ isOpen, onClose, onWorkoutAdded, selectedDate }) => {
 
   if (!isOpen) return null;
 
+  const displayDate = selectedDate ? selectedDate.format('MMM D, YYYY') : dayjs().format('MMM D, YYYY');
+  const isToday = selectedDate ? selectedDate.isSame(dayjs(), 'day') : true;
+
   return (
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
         <Header>
-          <Title>Add Workout</Title>
+          <Title>Add Workout {isToday ? '' : `for ${displayDate}`}</Title>
           <CloseButton onClick={onClose}>
             <Close />
           </CloseButton>

@@ -25,6 +25,7 @@ export const getWorkouts = async (date) => API.get(`/user/workout?date=${date}`)
 export const addWorkout = async (data) => API.post("/user/workout", data);
 export const updateWorkout = async (id, data) => API.put(`/user/workout/${id}`, data);
 export const deleteWorkout = async (id) => API.delete(`/user/workout/${id}`);
+export const getDashboardByDate = async (date) => API.get(`/user/dashboard?date=${date}`);
 
 // AI Chat API
 export const chatWithAI = async (message, history) => API.post("/user/chat", { message, history });
