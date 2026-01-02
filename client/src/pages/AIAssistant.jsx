@@ -106,6 +106,19 @@ const BotAvatarLarge = styled.div`
   font-size: 36px;
   box-shadow: 0 10px 40px ${({ theme }) => theme.primary + '40'};
   animation: ${float} 3s ease-in-out infinite;
+  
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    border-radius: 18px;
+  }
+  @media (max-width: 480px) {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 14px;
+  }
 `;
 
 const BotName = styled.h2`
@@ -114,6 +127,13 @@ const BotName = styled.h2`
   color: ${({ theme }) => theme.text_primary};
   margin: 0;
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 const BotTagline = styled.p`
@@ -121,6 +141,13 @@ const BotTagline = styled.p`
   color: ${({ theme }) => theme.text_secondary};
   margin: 0;
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const StatusBadge = styled.div`
@@ -141,6 +168,17 @@ const StatusBadge = styled.div`
     background: ${({ theme }) => theme.green};
     border-radius: 50%;
     animation: ${pulse} 2s infinite;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 4px 10px;
+    font-size: 10px;
+    gap: 6px;
+    
+    &::before {
+      width: 6px;
+      height: 6px;
+    }
   }
 `;
 
@@ -177,6 +215,17 @@ const CapabilityIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  @media (max-width: 480px) {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
 `;
 
 const CapabilityText = styled.div`
@@ -187,6 +236,13 @@ const CapabilityTitle = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
+  
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+  @media (max-width: 480px) {
+    font-size: 11px;
+  }
 `;
 
 const CapabilityDesc = styled.div`
@@ -208,6 +264,14 @@ const ChatSection = styled.div`
   border: 1px solid ${({ theme }) => theme.text_secondary + '15'};
   overflow: hidden;
   box-shadow: 0 4px 30px ${({ theme }) => theme.primary + '10'};
+  
+  @media (max-width: 768px) {
+    border-radius: 16px;
+  }
+  @media (max-width: 480px) {
+    border-radius: 12px;
+    min-height: 60vh;
+  }
 `;
 
 const ChatHeader = styled.div`
@@ -219,6 +283,13 @@ const ChatHeader = styled.div`
     ${({ theme }) => theme.primary + '10'} 0%, 
     transparent 100%);
   border-bottom: 1px solid ${({ theme }) => theme.text_secondary + '10'};
+  
+  @media (max-width: 768px) {
+    padding: 12px 16px;
+  }
+  @media (max-width: 480px) {
+    padding: 10px 12px;
+  }
 `;
 
 const ChatTitle = styled.div`
@@ -228,6 +299,14 @@ const ChatTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  
+  @media (max-width: 768px) {
+    font-size: 14px;
+    gap: 6px;
+  }
+  @media (max-width: 480px) {
+    font-size: 13px;
+  }
 `;
 
 const MessageCount = styled.span`
@@ -253,6 +332,21 @@ const ClearButton = styled.button`
     border-color: ${({ theme }) => theme.red};
     color: ${({ theme }) => theme.red};
     background: ${({ theme }) => theme.red + '10'};
+  }
+  
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  @media (max-width: 480px) {
+    padding: 6px 10px;
+    font-size: 11px;
+    gap: 4px;
+    
+    span {
+      display: none;
+    }
   }
 `;
 
@@ -327,6 +421,11 @@ const QuickReplies = styled.div`
   flex-wrap: wrap;
   gap: 8px;
   padding: 0 4px;
+  
+  @media (max-width: 480px) {
+    gap: 6px;
+    padding: 0;
+  }
 `;
 
 const QuickReply = styled.button`
@@ -343,6 +442,17 @@ const QuickReply = styled.button`
     background: ${({ theme }) => theme.primary};
     color: white;
     transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
+  @media (max-width: 480px) {
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 14px;
   }
 `;
 
@@ -366,12 +476,29 @@ const TypingIndicator = styled.div`
     &:nth-child(2) { animation-delay: -0.16s; }
     &:nth-child(3) { animation-delay: 0s; }
   }
+  
+  @media (max-width: 480px) {
+    padding: 12px 16px;
+    gap: 5px;
+    
+    span {
+      width: 6px;
+      height: 6px;
+    }
+  }
 `;
 
 const InputSection = styled.div`
   padding: 20px 24px;
   background: ${({ theme }) => theme.bg};
   border-top: 1px solid ${({ theme }) => theme.text_secondary + '10'};
+  
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -388,6 +515,17 @@ const InputWrapper = styled.div`
     border-color: ${({ theme }) => theme.primary};
     box-shadow: 0 0 0 4px ${({ theme }) => theme.primary + '15'};
   }
+  
+  @media (max-width: 768px) {
+    gap: 8px;
+    border-radius: 12px;
+    padding: 4px 4px 4px 16px;
+  }
+  @media (max-width: 480px) {
+    gap: 6px;
+    border-radius: 10px;
+    padding: 2px 2px 2px 12px;
+  }
 `;
 
 const Input = styled.input`
@@ -401,6 +539,15 @@ const Input = styled.input`
   
   &::placeholder {
     color: ${({ theme }) => theme.text_secondary};
+  }
+  
+  @media (max-width: 768px) {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+  @media (max-width: 480px) {
+    padding: 10px 0;
+    font-size: 13px;
   }
 `;
 
@@ -425,6 +572,17 @@ const SendButton = styled.button`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
   }
 `;
 
