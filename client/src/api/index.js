@@ -18,7 +18,10 @@ export const UserSignUp = async (data) => API.post("/user/signup", data);
 export const UserSignIn = async (data) => API.post("/user/signin", data);
 
 // Dashboard APIs
-export const getDashboardDetails = async () => API.get("/user/dashboard");
+export const getDashboardDetails = async (date) => {
+  const url = date ? `/user/dashboard?date=${date}` : "/user/dashboard";
+  return API.get(url);
+};
 
 // Workout APIs
 export const getWorkouts = async (date) => API.get(`/user/workout?date=${date}`);

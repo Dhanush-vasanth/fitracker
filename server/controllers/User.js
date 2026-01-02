@@ -71,7 +71,9 @@ export const getUserDashboard = async (req, res, next) => {
       return next(createError(404, "User not found"));
     }
 
-    const currentDateFormatted = new Date();
+    // Support date query parameter for fetching specific date's dashboard
+    const queryDate = req.query.date ? new Date(req.query.date) : new Date();
+    const currentDateFormatted = queryDate;
     const startToday = new Date(
       currentDateFormatted.getFullYear(),
       currentDateFormatted.getMonth(),
