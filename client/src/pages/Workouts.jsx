@@ -38,6 +38,12 @@ const Wrapper = styled.div`
     border: 1px solid ${({ theme }) => theme.text_primary + 20};
     border-radius: 14px;
     box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.primary + 15};
+    @media (max-width: 600px) {
+        padding: 12px;
+    }
+    @media (max-width: 480px) {
+        padding: 8px;
+    }
 `;
 const Right = styled.div`
     flex: 1;
@@ -98,6 +104,10 @@ const AddWorkoutButton = styled.button`
     bottom: 24px;
     right: 24px;
     width: 56px;
+    @media (max-width: 480px) {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
     height: 56px;
     border-radius: 50%;
     background: ${({ theme }) => theme.primary};

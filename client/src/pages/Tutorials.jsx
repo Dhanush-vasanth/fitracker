@@ -34,6 +34,10 @@ const Title = styled.h1`
   align-items: center;
   gap: 12px;
   margin: 0;
+  @media (max-width: 480px) {
+    font-size: 22px;
+    gap: 8px;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -72,6 +76,10 @@ const SearchInput = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.text_secondary};
   }
+  @media (max-width: 480px) {
+    padding: 12px 14px 12px 44px;
+    font-size: 13px;
+  }
 `;
 
 const Categories = styled.div`
@@ -100,6 +108,10 @@ const CategoryChip = styled.button`
       background: ${theme.text_secondary + '40'};
     }
   `}
+  @media (max-width: 480px) {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 `;
 
 const VideoGrid = styled.div`
@@ -107,6 +119,10 @@ const VideoGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
   padding-bottom: 40px;
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 `;
 
 const VideoCard = styled.a`
@@ -175,6 +191,10 @@ const VideoInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 8px;
+  }
 `;
 
 const VideoTitle = styled.h3`

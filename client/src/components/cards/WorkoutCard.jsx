@@ -16,6 +16,11 @@ const Card = styled.div`
     @media (max-width: 600px) {
         padding: 12px 14px;
     }
+    @media (max-width: 480px) {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 12px;
+    }
 `;
 const CardHeader = styled.div`
     display: flex;
@@ -30,6 +35,10 @@ const Category = styled.div`
     background: ${({ theme }) => theme.primary + 20};
     padding: 4px 10px;
     border-radius: 8px;
+    @media (max-width: 480px) {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
 `;
 const ActionButtons = styled.div`
     display: flex;
@@ -63,6 +72,9 @@ const Name = styled.div`
     font-size: 20px;
     color: ${({ theme }) => theme.text_primary};
     font-weight: 600;
+    @media (max-width: 480px) {
+        font-size: 16px;
+    }
 `;
 const Sets = styled.div`
     font-size: 15px;
@@ -70,6 +82,9 @@ const Sets = styled.div`
     font-weight: 500;
     display: flex;
     gap: 6px;
+    @media (max-width: 480px) {
+        font-size: 13px;
+    }
 `;
 const Flex = styled.div`
     display: flex;
@@ -83,6 +98,9 @@ const Details = styled.div`
     display: flex;
     align-items: center;
     gap: 6px;
+    @media (max-width: 480px) {
+        font-size: 13px;
+    }
 `;
 const CaloriesChip = styled.div`
     font-size: 12px;

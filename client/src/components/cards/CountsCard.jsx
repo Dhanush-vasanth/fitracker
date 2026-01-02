@@ -10,6 +10,10 @@ const Card = styled.div`
     box-shadow: 1px 6px 20px 0px  ${({ theme }) => theme.text_primary + 15};
     display: flex;
     gap: 6px;
+    @media (max-width: 480px) {
+        min-width: 140px;
+        padding: 16px;
+    }
 `;
 const Left = styled.div`
     flex: 1;
@@ -79,6 +83,9 @@ const Icon = styled.div`
     background: ${bg};
     color: ${color};
     `}
+    @media (max-width: 480px) {
+        padding: 6px;
+    }
 `;
 
 const CountsCard = ({item, data }) => {

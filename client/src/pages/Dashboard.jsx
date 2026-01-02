@@ -18,6 +18,9 @@ const Container = styled.div`
     justify-content: center;
     padding: 22px 0px;
     overflow-y: scroll;
+    @media (max-width: 480px) {
+        padding: 12px 0px;
+    }
 `;
 const Wrapper = styled.div`
     flex: 1;
@@ -25,8 +28,11 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 22px;
-    @media  (max-width: 600px){
+    @media (max-width: 600px) {
         gap: 12px;
+    }
+    @media (max-width: 480px) {
+        gap: 8px;
     }
 `;
 const Title = styled.div`
@@ -34,6 +40,10 @@ const Title = styled.div`
     font-size: 22px;
     color: ${({ theme })=>theme.text_primary};
     font-weight: 500;
+    @media (max-width: 480px) {
+        font-size: 18px;
+        padding: 0px 12px;
+    }
 `;
 const FlexWrap = styled.div`
     display: flex;
@@ -44,6 +54,10 @@ const FlexWrap = styled.div`
     @media (max-width: 600px) {
         gap: 12px;
     }
+    @media (max-width: 480px) {
+        gap: 8px;
+        padding: 0px 8px;
+    }
 `;
 const Section = styled.div`
     display: flex;
@@ -52,6 +66,10 @@ const Section = styled.div`
     padding: 0px 16px;
     @media (max-width: 600px) {
         gap: 12px;
+    }
+    @media (max-width: 480px) {
+        gap: 8px;
+        padding: 0px 8px;
     }
 `;
 const CardWrapper = styled.div`
@@ -95,6 +113,12 @@ const AddWorkoutCard = styled.div`
     &:hover {
         transform: translateY(-2px);
         box-shadow: 1px 8px 25px 0px ${({ theme }) => theme.primary + 25};
+    }
+    @media (max-width: 480px) {
+        min-width: 100%;
+        padding: 16px;
+        min-height: 150px;
+        gap: 12px;
     }
 `;
 

@@ -19,6 +19,9 @@ const Nav = styled.div`
     z-index: 10;
     color: white;
     border-bottom: 1px solid ${({ theme })=>theme.text_secondary +20};
+    @media (max-width: 480px) {
+        height: 64px;
+    }
 `;
 const NavContainer = styled.div`
     display: flex;
@@ -29,6 +32,10 @@ const NavContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     font-size: 1rem;
+    @media (max-width: 480px) {
+        padding: 0 12px;
+        gap: 8px;
+    }
 `;
 const NavLogo = styled(linkR)`
     display: flex;
@@ -39,10 +46,18 @@ const NavLogo = styled(linkR)`
     font-size: 18px;
     text-decoration: none;
     color: ${({ theme })=>theme.black};
+    @media (max-width: 480px) {
+        gap: 8px;
+        font-size: 16px;
+    }
 `;
 const Logo = styled.img`
     width: 40px;
     height: 42px;
+    @media (max-width: 480px) {
+        width: 32px;
+        height: 34px;
+    }
 `;
 const Mobileicon = styled.div`
     color: ${({ theme })=>theme.text_primary};
@@ -92,6 +107,10 @@ const UserContainer = styled.div`
     gap: 16px;
     padding: 0 6px;
     color: ${({ theme })=>theme.text_primary};
+    @media (max-width: 480px) {
+        gap: 8px;
+        padding: 0;
+    }
 `;
 const TextButton = styled.div`
     text-align: end;
@@ -102,6 +121,9 @@ const TextButton = styled.div`
     transition: all 0.3s ease;
     &:hover{
         color: ${({ theme })=>theme.primary};
+    }
+    @media (max-width: 480px) {
+        font-size: 14px;
     }
 `;
 const MobileMenu = styled.ul`
@@ -124,6 +146,11 @@ const MobileMenu = styled.ul`
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
     z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1000")};
+    @media (max-width: 480px) {
+        top: 64px;
+        padding: 12px 20px 24px 20px;
+        width: 100%;
+    }
 `;
 const AvatarLink = styled(NavLink)`
     cursor: pointer;

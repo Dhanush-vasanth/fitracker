@@ -15,6 +15,10 @@ const Card = styled.div`
     @media (max-width: 600px) {
         padding: 16px;
     }
+    @media (max-width: 480px) {
+        min-width: 100%;
+        padding: 12px;
+    }
 `;
 const Title = styled.div`
     font-weight: 600;

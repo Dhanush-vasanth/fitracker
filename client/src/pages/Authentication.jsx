@@ -34,6 +34,10 @@ const Right = styled.div`
     gap:16px;
     align-items: center;
     justify-content: center;
+    @media (max-width: 480px) {
+        padding: 20px 16px;
+        gap: 12px;
+    }
 `;
 const Logo = styled.img`
     position: absolute;

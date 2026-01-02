@@ -26,6 +26,12 @@ const Modal = styled.div`
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  @media (max-width: 480px) {
+    max-width: 100%;
+    margin: 0 8px;
+    border-radius: 12px;
+    max-height: 95vh;
+  }
 `;
 
 const Header = styled.div`
@@ -34,6 +40,9 @@ const Header = styled.div`
   align-items: center;
   padding: 20px 24px;
   border-bottom: 1px solid ${({ theme }) => theme.text_secondary + '30'};
+  @media (max-width: 480px) {
+    padding: 16px;
+  }
 `;
 
 const Title = styled.h2`
@@ -41,6 +50,9 @@ const Title = styled.h2`
   font-weight: 600;
   color: ${({ theme }) => theme.popup_text_primary || '#fff'};
   margin: 0;
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -63,6 +75,10 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media (max-width: 480px) {
+    padding: 16px;
+    gap: 16px;
+  }
 `;
 
 const FormBox = styled.div`
@@ -73,6 +89,10 @@ const FormBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  @media (max-width: 480px) {
+    padding: 14px;
+    gap: 12px;
+  }
 `;
 
 const Row = styled.div`
@@ -302,6 +322,10 @@ const Footer = styled.div`
   gap: 12px;
   padding: 20px 24px;
   border-top: 1px solid ${({ theme }) => theme.text_secondary + '30'};
+  @media (max-width: 480px) {
+    padding: 16px;
+    gap: 8px;
+  }
 `;
 
 const Button = styled.button`
@@ -334,6 +358,10 @@ const Button = styled.button`
       background: ${theme.text_secondary + '20'};
     }
   `}
+  @media (max-width: 480px) {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
 `;
 
 const ErrorText = styled.div`

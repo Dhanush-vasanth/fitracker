@@ -46,6 +46,10 @@ const ProfileCard = styled.div`
     align-items: center;
     gap: 24px;
     box-shadow: 0 4px 20px ${({ theme }) => theme.shadow};
+    @media (max-width: 480px) {
+        padding: 20px 16px;
+        gap: 16px;
+    }
 `;
 
 const AvatarSection = styled.div`
@@ -59,6 +63,9 @@ const UserName = styled.div`
     font-size: 28px;
     font-weight: 700;
     color: ${({ theme }) => theme.text_primary};
+    @media (max-width: 480px) {
+        font-size: 22px;
+    }
 `;
 
 const UserEmail = styled.div`

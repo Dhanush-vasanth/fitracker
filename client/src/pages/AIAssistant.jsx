@@ -31,6 +31,9 @@ const Container = styled.div`
     ${({ theme }) => theme.bg} 0%, 
     ${({ theme }) => theme.primary + '08'} 50%,
     ${({ theme }) => theme.bg} 100%);
+  @media (max-width: 480px) {
+    padding: 12px 0px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -43,6 +46,11 @@ const Wrapper = styled.div`
   
   @media (max-width: 900px) {
     flex-direction: column;
+  }
+  @media (max-width: 480px) {
+    padding: 0px 8px;
+    gap: 12px;
+    height: calc(100vh - 100px);
   }
 `;
 
@@ -57,6 +65,9 @@ const Sidebar = styled.div`
     flex-direction: row;
     overflow-x: auto;
     padding-bottom: 8px;
+  }
+  @media (max-width: 480px) {
+    gap: 8px;
   }
 `;
 
@@ -75,6 +86,11 @@ const BotCard = styled.div`
   @media (max-width: 900px) {
     min-width: 200px;
     padding: 16px;
+  }
+  @media (max-width: 480px) {
+    min-width: 160px;
+    padding: 12px;
+    gap: 12px;
   }
 `;
 
@@ -260,6 +276,10 @@ const MessagesContainer = styled.div`
     background: ${({ theme }) => theme.text_secondary + '30'};
     border-radius: 3px;
   }
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 16px;
+  }
 `;
 
 const MessageGroup = styled.div`
@@ -295,6 +315,11 @@ const MessageBubble = styled.div`
     border-radius: 20px 20px 20px 4px;
     border: 1px solid ${theme.text_secondary + '15'};
   `}
+  @media (max-width: 480px) {
+    max-width: 95%;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
 `;
 
 const QuickReplies = styled.div`

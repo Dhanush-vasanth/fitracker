@@ -12,16 +12,26 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 36px;
+    @media (max-width: 480px) {
+        gap: 24px;
+        padding: 0 16px;
+    }
 `;
 const Title = styled.div`
     font-size: 30px;
     font-weight: 800;
     color: ${({ theme }) => theme.text_primary};
+    @media (max-width: 480px) {
+        font-size: 24px;
+    }
 `;
 const Span = styled.div`
     font-size: 16px;
     font-weight: 400;
     color: ${({ theme }) => theme.text_secondary + 90};
+    @media (max-width: 480px) {
+        font-size: 14px;
+    }
 `;
 const ErrorText = styled.div`
     font-size: 14px;
