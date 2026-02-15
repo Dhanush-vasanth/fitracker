@@ -9,6 +9,7 @@ import Workouts from "./pages/Workouts";
 import Tutorials from "./pages/Tutorials";
 import AIAssistant from "./pages/AIAssistant";
 import Profile from "./pages/Profile";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 
 const Container = styled.div`
@@ -28,25 +29,27 @@ function App() {
 
   return (
   <ThemeProvider theme ={lightTheme}>
-    <BrowserRouter>
-    {currentUser ? (
-      <Container>
-        <Navbar currentUser={currentUser} />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/workouts" element={<Workouts />} />
-          <Route path="/tutorials" element={<Tutorials />} />
-          <Route path="/ai-assistant" element={<AIAssistant />} />
-          <Route path="/profile" element={<Profile />} />
+    <ErrorBoundary>
+      <BrowserRouter>
+      {currentUser ? (
+        <Container>
+          <Navbar currentUser={currentUser} />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/workouts" element={<Workouts />} />
+            <Route path="/tutorials" element={<Tutorials />} />
+            <Route path="/ai-assistant" element={<AIAssistant />} />
+            <Route path="/profile" element={<Profile />} />
 
-        </Routes>
-      </Container>
-      ) : (
-      <Container>
-        <Authentication />
-      </Container>
-      )}
-    </BrowserRouter>
+          </Routes>
+        </Container>
+        ) : (
+        <Container>
+          <Authentication />
+        </Container>
+        )}
+      </BrowserRouter>
+    </ErrorBoundary>
   </ThemeProvider>
   );
 }

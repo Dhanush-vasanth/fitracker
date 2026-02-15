@@ -2,16 +2,37 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080/api/",
+  timeout: 30000, // 30 second timeout
 });
 
 // Add token to requests
-API.interceptors.request.use((req) => {
-  const token = localStorage.getItem("fittrack-token");
-  if (token) {
-    req.headers.Authorization = `Bearer ${token}`;
+API.interceptors.request.use(
+  (req) => {
+    const token = localStorage.getItem("fittrack-token");
+    if (token) {
+      req.headers.Authorization = `Bearer ${token}`;
+    }
+    return req;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return req;
-});
+);
+
+// Handle response errors globally
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Handle 401 - Clear token and redirect to login
+    if (error.response?.status === 401) {
+      localStorage.removeItem("fittrack-token");
+      // Clear redux persist state
+      localStorage.removeItem("persist:root");
+      window.location.href = "/";
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Auth APIs
 export const UserSignUp = async (data) => API.post("/user/signup", data);

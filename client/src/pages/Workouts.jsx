@@ -174,7 +174,7 @@ const Workouts = () => {
       setWorkouts(res.data.todaysWorkouts || []);
       setTotalCalories(res.data.totalCaloriesBurnt || 0);
     } catch (err) {
-      console.error(err);
+      console.error('Failed to fetch workouts:', err);
       setWorkouts([]);
     } finally {
       setLoading(false);
@@ -183,6 +183,7 @@ const Workouts = () => {
 
   useEffect(() => {
     fetchWorkouts(selectedDate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate]);
 
   const handleDateChange = (newDate) => {

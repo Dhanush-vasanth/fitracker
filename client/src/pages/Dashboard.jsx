@@ -438,7 +438,7 @@ const Dashboard = () => {
             setData(dashboardRes.data);
             setTodaysWorkouts(workoutsRes.data.todaysWorkouts || []);
         } catch (err) {
-            console.error(err);
+            console.error('Failed to fetch dashboard data:', err);
         } finally {
             setLoading(false);
         }
@@ -446,6 +446,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         fetchDashboardData(selectedDate);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedDate]);
 
     // Close calendar when clicking outside

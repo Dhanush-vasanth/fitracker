@@ -12,6 +12,22 @@ export const UserRegister = async (req, res, next) => {
   try {
     const { email, password, name, img } = req.body;
 
+    // Validate required fields
+    if (!email || !password || !name) {
+      return next(createError(400, "Name, email, and password are required"));
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return next(createError(400, "Please provide a valid email address"));
+    }
+
+    // Password length validation
+    if (password.length < 6) {
+      return next(createError(400, "Password must be at least 6 characters"));
+    }
+
     // Check if the email is in use
     const existingUser = await User.findOne({ email }).exec();
     if (existingUser) {
@@ -29,7 +45,7 @@ export const UserRegister = async (req, res, next) => {
     });
     const createdUser = await user.save();
     const token = jwt.sign({ id: createdUser._id }, process.env.JWT, {
-      expiresIn: "9999 years",
+      expiresIn: "7d",
     });
     return res.status(200).json({ token, user: createdUser });
   } catch (error) {
@@ -40,6 +56,11 @@ export const UserRegister = async (req, res, next) => {
 export const UserLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+
+    // Validate required fields
+    if (!email || !password) {
+      return next(createError(400, "Email and password are required"));
+    }
 
     const user = await User.findOne({ email: email });
     // Check if user exists
@@ -54,7 +75,7 @@ export const UserLogin = async (req, res, next) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT, {
-      expiresIn: "9999 years",
+      expiresIn: "7d",
     });
 
     return res.status(200).json({ token, user });
@@ -266,9 +287,9 @@ export const addWorkout = async (req, res , next) => {
       if (line.startsWith("#")) {
         // If we have collected workout lines, process them
         if (workoutLines.length > 0) {
-          const workoutDetails = parseWorkoutLines(workoutLines, currentCategory);
-          if (workoutDetails) {
-            parsedWorkouts.push(workoutDetails);
+          const workoutsFromLines = parseWorkoutLines(workoutLines, currentCategory);
+          if (workoutsFromLines && workoutsFromLines.length > 0) {
+            parsedWorkouts.push(...workoutsFromLines);
           }
           workoutLines = [];
         }
@@ -283,9 +304,9 @@ export const addWorkout = async (req, res , next) => {
     
     // Process the last workout if exists
     if (workoutLines.length > 0) {
-      const workoutDetails = parseWorkoutLines(workoutLines, currentCategory);
-      if (workoutDetails) {
-        parsedWorkouts.push(workoutDetails);
+      const workoutsFromLines = parseWorkoutLines(workoutLines, currentCategory);
+      if (workoutsFromLines && workoutsFromLines.length > 0) {
+        parsedWorkouts.push(...workoutsFromLines);
       }
     }
 
@@ -305,39 +326,45 @@ export const addWorkout = async (req, res , next) => {
 };
 
 // Function to parse workout lines (new format)
+// Now handles multiple workouts - each workout is 4 lines
 const parseWorkoutLines = (lines, category) => {
-  if (lines.length < 4) return null;
+  const workouts = [];
   
-  try {
-    const workoutName = lines[0].trim();
-    const setsRepsLine = lines[1].trim();
-    const weight = parseFloat(lines[2].replace(/[^\d.]/g, '')) || 0;
-    const duration = parseFloat(lines[3].replace(/[^\d.]/g, '')) || 0;
-    
-    // Parse sets and reps from format like "3 sets x 15 reps"
-    const setsMatch = setsRepsLine.match(/(\d+)\s*sets/i);
-    const repsMatch = setsRepsLine.match(/(\d+)\s*reps/i);
-    
-    const sets = setsMatch ? parseInt(setsMatch[1]) : 1;
-    const reps = repsMatch ? parseInt(repsMatch[1]) : 1;
-    
-    return {
-      category,
-      workoutName,
-      sets,
-      reps,
-      weight,
-      duration
-    };
-  } catch (error) {
-    return null;
+  // Process lines in chunks of 4 (name, sets/reps, weight, duration)
+  for (let i = 0; i + 3 < lines.length; i += 4) {
+    try {
+      const workoutName = lines[i].trim();
+      const setsRepsLine = lines[i + 1].trim();
+      const weight = parseFloat(lines[i + 2].replace(/[^\d.]/g, '')) || 0;
+      const duration = parseFloat(lines[i + 3].replace(/[^\d.]/g, '')) || 0;
+      
+      // Parse sets and reps from format like "3 sets x 15 reps"
+      const setsMatch = setsRepsLine.match(/(\d+)\s*sets/i);
+      const repsMatch = setsRepsLine.match(/(\d+)\s*reps/i);
+      
+      const sets = setsMatch ? parseInt(setsMatch[1]) : 1;
+      const reps = repsMatch ? parseInt(repsMatch[1]) : 1;
+      
+      workouts.push({
+        category,
+        workoutName,
+        sets,
+        reps,
+        weight,
+        duration
+      });
+    } catch (error) {
+      // Skip invalid workout blocks
+      continue;
+    }
   }
+  
+  return workouts;
 };
 
 // Function to parse workout details from a line (old format)
 const parseWorkoutLine = (parts) => {
   const details = {};
-  console.log(parts);
   if (parts.length >= 5) {
     details.workoutName = parts[1].substring(1).trim();
     details.sets = parseInt(parts[2].split("sets")[0].substring(1).trim());
@@ -346,7 +373,6 @@ const parseWorkoutLine = (parts) => {
     );
     details.weight = parseFloat(parts[3].split("kg")[0].substring(1).trim());
     details.duration = parseFloat(parts[4].split("min")[0].substring(1).trim());
-    console.log(details);
     return details;
   }
   return null;

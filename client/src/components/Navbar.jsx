@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link as linkR, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import LogoImg from '../utils/images/Logo.png'
 import { MenuRounded } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
