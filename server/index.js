@@ -11,7 +11,8 @@ const app = express();
 // CORS configuration
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://fitracker-3.onrender.com',
+    'https://fitracker-6.onrender.com',
+    'https://fitracker-4.onrender.com',
     process.env.CLIENT_URL
 ].filter(Boolean);
 
