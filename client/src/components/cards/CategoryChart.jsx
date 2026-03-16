@@ -29,11 +29,19 @@ const Title = styled.div`
     }
 `;
 
+const NoData = styled.div`
+    text-align: center;
+    color: ${({ theme }) => theme.text_secondary};
+    font-size: 14px;
+    padding: 40px 0;
+`;
+
 const CategoryChart = ({ data}) => {
+  const hasData = data?.pieChartData?.length > 0;
   return (
     <Card>
-      <Title>Weekly Calories burned</Title>
-      {data?.pieChartData && (
+      <Title>Workouts by Category</Title>
+      {hasData ? (
       <PieChart
       series={[
          {
@@ -46,6 +54,8 @@ const CategoryChart = ({ data}) => {
         ]}
         height={300}
         />
+      ) : (
+        <NoData>No workout data for this date</NoData>
       )}
     </Card>
   );
