@@ -6,6 +6,18 @@ import UserRoutes from "./routes/User.js";
 
 dotenv.config();
 
+const validateRequiredEnv = () => {
+    const requiredVars = ['MONGODB_URI', 'JWT'];
+    const missingVars = requiredVars.filter((key) => !process.env[key]);
+
+    if (missingVars.length > 0) {
+        console.error(`Missing required environment variables: ${missingVars.join(', ')}`);
+        process.exit(1);
+    }
+};
+
+validateRequiredEnv();
+
 const app = express();
 
 // CORS configuration
