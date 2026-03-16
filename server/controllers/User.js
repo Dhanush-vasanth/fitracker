@@ -129,25 +129,7 @@ export const getUserDashboard = async (req, res, next) => {
         ? totalCaloriesBurnt[0].totalCaloriesBurnt / totalWorkouts
         : 0;
 
-    // Fetch category of workouts
-    const categoryCalories = await Workout.aggregate([
-      { $match: { user: user._id, date: { $gte: startToday, $lt: endToday } } },
-      {
-        $group: {
-          _id: "$category",
-          totalCaloriesBurnt: { $sum: "$caloriesBurned" },
-        },
-      },
-    ]);
-
-    //Format category data for pie chart
-
-    const pieChartData = categoryCalories.map((category, index) => ({
-      id: index,
-      value: category.totalCaloriesBurnt,
-      label: category._id,
-    }));
-      // Fetch workout count per category (used for pie chart - calories are often 0 for bodyweight)
+    // Fetch workout count per category (used for pie chart - calories are often 0 for bodyweight)
       const categoryWorkouts = await Workout.aggregate([
         { $match: { user: user._id, date: { $gte: startToday, $lt: endToday } } },
         {

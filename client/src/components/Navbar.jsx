@@ -37,7 +37,7 @@ const NavContainer = styled.div`
         gap: 8px;
     }
 `;
-const NavLogo = styled(linkR)`
+const NavLogo = styled(NavLink)`
     display: flex;
     align-items: center;
     gap: 16px;
