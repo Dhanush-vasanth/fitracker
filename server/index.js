@@ -7,8 +7,15 @@ import UserRoutes from "./routes/User.js";
 dotenv.config();
 
 const validateRequiredEnv = () => {
-    const requiredVars = ['MONGODB_URI', 'JWT'];
-    const missingVars = requiredVars.filter((key) => !process.env[key]);
+    const missingVars = [];
+
+    if (!process.env.MONGODB_URI) {
+        missingVars.push('MONGODB_URI');
+    }
+
+    if (!process.env.JWT && !process.env.JWT_SECRET && !process.env.SECRET) {
+        missingVars.push('JWT|JWT_SECRET|SECRET');
+    }
 
     if (missingVars.length > 0) {
         console.error(`Missing required environment variables: ${missingVars.join(', ')}`);
@@ -59,7 +66,8 @@ app.use((req, res, next) => {
 app.get("/",async(req, res) => {
     res.status(200).json({
         message: "FitTracker API is running",
-        status: "healthy"
+        status: "healthy",
+        hasJwtSecret: Boolean(process.env.JWT || process.env.JWT_SECRET || process.env.SECRET)
     });
 });
 

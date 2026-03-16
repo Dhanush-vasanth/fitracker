@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { createError } from '../error.js';
 
+const JWT_SECRET = process.env.JWT || process.env.JWT_SECRET || process.env.SECRET;
+
 
 export const verifyToken = (req, res, next) => {
     try{
@@ -13,7 +15,7 @@ export const verifyToken = (req, res, next) => {
             return next (createError(401," You are not authenticated"));
         }
 
-        const decode = jwt.verify(token, process.env.JWT);
+        const decode = jwt.verify(token, JWT_SECRET);
         req.user = decode;
         return next();
 

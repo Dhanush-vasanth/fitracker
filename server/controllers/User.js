@@ -8,6 +8,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
+const JWT_SECRET = process.env.JWT || process.env.JWT_SECRET || process.env.SECRET;
+
 export const UserRegister = async (req, res, next) => {
   try {
     const { email, password, name, img } = req.body;
@@ -44,7 +46,7 @@ export const UserRegister = async (req, res, next) => {
       img,
     });
     const createdUser = await user.save();
-    const token = jwt.sign({ id: createdUser._id }, process.env.JWT, {
+    const token = jwt.sign({ id: createdUser._id }, JWT_SECRET, {
       expiresIn: "7d",
     });
     return res.status(200).json({ token, user: createdUser });
@@ -74,7 +76,7 @@ export const UserLogin = async (req, res, next) => {
       return next(createError(403, "Incorrect password"));
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT, {
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, {
       expiresIn: "7d",
     });
 
